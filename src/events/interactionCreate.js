@@ -1,0 +1,20 @@
+module.exports = {
+  name:'interactionCreate',
+  async execute(interaction){
+    if(!interaction.isChatInputCommand()) return;
+  
+    const command = interaction.client.commands.get(interaction.commandName)
+  
+    if (!command){
+      console.error(`Nenhum comando correspondente a ${interaction.commandName} foi encontrado.`);
+      return;
+    }
+  
+    try{
+      await command.execute(interaction)
+    } catch(error){
+      console.error(`Erro executado ${interaction.commandName}`)
+      console.error(error)
+    }
+  },
+};
