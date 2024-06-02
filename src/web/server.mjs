@@ -4,18 +4,22 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import {Server} from 'socket.io'
 
+import { Client, Events, Collection, GatewayIntentBits } from 'discord.js';
+const client = new Client({
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+  ]
+}) 
+
 const app = express();
 const server = createServer(app);
 const io = new Server(server)
-
 const __dirname = dirname(fileURLToPath(import.meta.url));
-
 
 app.get('/', (req, res) => {
   res.sendFile(join(__dirname, 'index.html'))
 });
-
-
 
 io.on('connection', (socket) => {
   console.log('a user connected')
@@ -24,16 +28,24 @@ io.on('connection', (socket) => {
   });
 });
 
-io.on('connection', (socket) =>{
-  socket.broadcast.emit('hi');
+io.on('connection', (socket) => {
   socket.on('chat message', (msg) => {
-    io.emit('chat message', msg)
+    client.once(Events.InteractionCreate, interaction => {
+      console.log('rapaiz')
+        const cn = 1071080860650053674
+        const channel = client.channels.cache.get(cn);
+        if (!channel) return console.log('I could not find such a channel.');
+    
+        channel.send('Hello!');
+        return
+      }
+    )
+    console.log('message: ' + msg);
   });
 });
 
 
-io.emit('za warudo')
-
 server.listen(3000, () =>{
   console.log('Server Running at http://localhost:3000');
 })
+
