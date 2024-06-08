@@ -4,6 +4,7 @@ const { Client, Events, Collection, GatewayIntentBits } = require('discord.js');
 const commandsPath = path.join(__dirname,'commands');
 const commandsFiles = fs.readdirSync(commandsPath).filter (file => file.endsWith('.js'))
 
+
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
@@ -52,4 +53,3 @@ client.on(Events.InteractionCreate, async interaction =>{
 })
 
 
-g
