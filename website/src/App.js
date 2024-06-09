@@ -9,12 +9,12 @@ const App = ({wsClient}) => {
       console.log('Websocket client connected')
     }
     wsClient.onmessage = (event) => {
-      setMessages([...messages, event.data])
+      setMessages([messages, event.data])
     };
     return () => {
       wsClient.close()
     };
-  }, []);
+  },[]);
 
   const handleMessageChange = (event) => {
     setMessage(event.target.value)
