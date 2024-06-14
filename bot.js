@@ -9,16 +9,6 @@ const commandsFiles = fs.readdirSync(commandsPath).filter (file => file.endsWith
 const eventsPath = path.join(__dirname,'src', 'events');
 const eventFiles = fs.readdirSync(eventsPath).filter (file => file.endsWith('.js'));
 
-// const express = require(express);
-// const http = require('http')
-// const {Server} = require('ws')
-
-// const port = 3000
-
-// const app = express()
-// const server = http.createServer(app)
-// const wss = new Server({server})
-
 const client = new Discord.Client({
   intents: [
     GatewayIntentBits.Guilds,
@@ -27,10 +17,7 @@ const client = new Discord.Client({
   ]
 }) 
 
-
-
 client.commands = new Collection()
-
 
 for(const file of commandsFiles){
   const filePath = path.join(commandsPath, file);
@@ -52,24 +39,7 @@ for(const file of eventFiles){
   } else{
     client.on(event.name, (...args) => event.execute(...args));
   };
-  
 };
 
 client.login(token);
-
-app.use(express.static(path.join(__dirname, "/website/build")))
-
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "/website/build", "index.html"))
-})
-
-// wss.on("connection", (ws) => {
-//   ws.on("message", (message) =>{
-//     console.log("mensagem recebida ", message)
-//   })
-// })
-
-// server.listen(port, ()=> 
-//   console.log("server listening on port",port)
-// )
 

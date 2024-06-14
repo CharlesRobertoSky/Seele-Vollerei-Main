@@ -1,4 +1,4 @@
-export function createWebsockeClient(){
+export function createWebSocketClient(){
   const socket = new WebSocket("ws://localhost:3000")
   socket.addEventListener("open", (event) => {
     console.log("WebSocket connected.");
