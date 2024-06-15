@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 
 const App = ({wsClient}) => {
-  const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
+  const [messages, setMessages] = useState([]);
 
   useEffect(()=> {
     wsClient.onopen = () => {
       console.log('Websocket client connected')
     }
     wsClient.onmessage = (event) => {
-      setMessages([messages, event.data])
+      setMessages([...messages, event.data]);
     };
     return () => {
       wsClient.close()
@@ -34,7 +34,7 @@ const App = ({wsClient}) => {
         
       </form>
       <ul>
-        {messages.mp((message, index) => {
+        {messages.map((message, index) => {
           <li key={index}>{message}</li>
         })}
       </ul>
