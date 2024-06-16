@@ -7,14 +7,14 @@ const App = ({wsClient}) => {
   useEffect(()=> {
     wsClient.onopen = () => {
       console.log('Websocket client connected')
-    }
+    };
     wsClient.onmessage = (event) => {
       setMessages([...messages, event.data]);
     };
-    return () => {
+    return (() => {
       wsClient.close()
-    };
-  },[]);
+    })
+  }, []);
 
   const handleMessageChange = (event) => {
     setMessage(event.target.value)
@@ -34,7 +34,7 @@ const App = ({wsClient}) => {
         
       </form>
       <ul>
-        {messages.map((message, index) => {
+        { messages.map( (message, index ) => {
           <li key={index}>{message}</li>
         })}
       </ul>

@@ -12,6 +12,8 @@
     "ws": "^8.17.0"
   },
   "scripts": {
-    "web": "node ./scr/web/server.mjs"
+    "web": "node ./scr/web/server.mjs",
+    "dev": "node bot.js"
+   
   }
 }
