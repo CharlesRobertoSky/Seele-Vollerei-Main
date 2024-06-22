@@ -38,7 +38,8 @@ const App = ({wsClient}) => {
           <li key={index}>{message}</li>
         })}
       </ul>
-    </div>
+    </div>,
+    console.log("Teste")
   )
 }
 
