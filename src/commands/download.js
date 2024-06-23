@@ -1,12 +1,11 @@
 const { SlashCommandBuilder } = require("discord.js");
-
-
 module.exports = {
   data:new SlashCommandBuilder()
-    .setName('teste')
-    .setDescription('Comando de teste, tendo criatividade'),
+    .setName('download')
+    .setDescription('retorna um link de download'),
   async execute(interaction) {
-    await interaction.reply('KKKK')
-  },
+    await interaction.reply('hello my friendo')
+
+  }
 };
 

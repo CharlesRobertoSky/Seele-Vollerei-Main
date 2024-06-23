@@ -9,15 +9,15 @@ const commandsFiles = fs.readdirSync(commandsPath).filter (file => file.endsWith
 const eventsPath = path.join(__dirname,'src', 'events');
 const eventFiles = fs.readdirSync(eventsPath).filter (file => file.endsWith('.js'));
 
-const express = require("express");
-const http = require('http')
-const {Server} = require('ws')
+// const express = require("express");
+// const http = require('http')
+// const {Server} = require('ws')
 
-const port = 3000
+// const port = 3000
 
-const app = express()
-const server = http.createServer(app)
-const wss = new Server({server})
+// const app = express()
+// const server = http.createServer(app)
+// const wss = new Server({server})
 
 const client = new Discord.Client({
   intents: [
@@ -57,19 +57,19 @@ for(const file of eventFiles){
 
 client.login(token);
 
-app.use(express.static(path.join(__dirname, "/website/build")))
+// app.use(express.static(path.join(__dirname, "/website/build")))
 
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "/website/build", "index.html"))
-})
+// app.get("/", (req, res) => {
+//   res.sendFile(path.join(__dirname, "/website/build", "index.html"))
+// })
 
-wss.on("connection", (ws) => {
-  ws.on("message", (message) =>{
-    console.log("mensagem recebida ", message)
-  })
-})
+// wss.on("connection", (ws) => {
+//   ws.on("message", (message) =>{
+//     console.log("mensagem recebida ", message)
+//   })
+// })
 
-server.listen(port, ()=> 
-  console.log(`server listening on port: http://localhost:${port}`)
-)
+// server.listen(port, ()=> 
+//   console.log(`server listening on port: http://localhost:${port}`)
+// )
 
