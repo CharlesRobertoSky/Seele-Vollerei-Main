@@ -27,8 +27,6 @@ const client = new Discord.Client({
   ]
 }) 
 
-
-
 client.commands = new Collection()
 
 
@@ -54,6 +52,37 @@ for(const file of eventFiles){
   };
   
 };
+client.on(Events.InteractionCreate, async interaction => {
+  console.log('return da interação ' ,interaction.client.commands.get(interaction.commandName))
+  if(!interaction.isChatInputCommand()) return
+
+  const command = interaction.client.commands.get(interaction.commandName)
+
+  if (!command){
+    console.error(`Nenhum comando correspondente a ${interaction.commandName} foi encontrado.`)
+    return
+  }
+ 
+  if (!interaction.isChatInputCommand()) return
+  if (interaction.commandName === 'ping'){
+    await interaction.reply({content:'Secret Pong!', ephemeral: true})
+  }
+  if(interaction.commandName ==='download'){
+    return console.log('Yamete kudasai')
+  }
+
+  try{
+    await command.execute(interaction);
+  } catch(error){
+    console.error(error)
+    if (interaction.replied || interaction.deferred){
+      await interaction.reply({
+        content:'Ocorreu um erro ao executar este comando!', ephemeral: true
+      })
+    await interaction.reply({content:'There was an error while executing this command!', ephemeral:true})
+    }}
+  
+})
 
 client.login(token);
 

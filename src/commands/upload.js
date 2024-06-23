@@ -1,10 +1,10 @@
 const { SlashCommandBuilder } = require("discord.js");
 module.exports = {
   data:new SlashCommandBuilder()
-    .setName('download')
-    .setDescription('retorna um link de download'),
+    .setName('upload')
+    .setDescription('Envia o arquivo para um drive'),
   async execute(interaction) {
-    await interaction.reply('hello my friend')
+    await interaction.reply('Comando indisponivel no momento')
 
   }
 };
