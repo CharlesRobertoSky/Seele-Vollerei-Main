@@ -68,7 +68,7 @@ client.on(Events.InteractionCreate, async interaction => {
     await interaction.reply({content:'Secret Pong!', ephemeral: true})
   }
   if(interaction.commandName ==='download'){
-    return console.log('Yamete kudasai')
+    return console.log('yamete kudasai')
   }
 
   try{
