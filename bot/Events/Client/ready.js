@@ -1,13 +1,13 @@
 const mongoose = require('mongoose')
 require('dotenv').config()
-const token = process.env.DISCORD_TOKEN
+const token = process.env.MONGODB
 
 module.exports = {
   name:"ready",
   once:true,
 
   async execute(interaction) {
-    await mongoose.connect(config.mongodb || '', {
+    await mongoose.connect(token || '', {
       keepAlive: true,
     })
     

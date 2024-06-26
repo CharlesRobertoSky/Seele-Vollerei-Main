@@ -6,7 +6,7 @@ function loadEvents(client) {
   const folders = fs.readdirSync('./bot/Events')
 
   for(const folder of folders) {
-    const files = fs.readdirSync(`./bot/Events/${folder}`).filter((file) => file.endsWith(".js"));
+    const files = fs.readdirSync(`../Events/${folder}`).filter((file) => file.endsWith(".js"));
     
     for (const file of files) {
     if (event.rest) {
@@ -16,7 +16,7 @@ function loadEvents(client) {
       if(event.once)
         client.once(event.name, (...args) => event.execute(...args, client))
     }
-    table.addrow(file, "loaded")
+    table.addRow(file, "loaded")
     continue
     }
   }
