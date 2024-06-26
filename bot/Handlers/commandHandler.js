@@ -28,4 +28,4 @@ function loadCommands(client){
   return console.log(table.toString(), "\n Loaded Commands")
 }
 
-module.exports = [ loadCommands ]
+module.exports ={ loadCommands }
