@@ -15,9 +15,10 @@ const client = new Client({
 });
 
 client.commands = new Collection();
-client.config = process.env.DISCORD_TOKEN
+client.config = process.env.DISCORD_TOKEN;
 
-client.login(client.config.DISCORD_TOKEN).then(() => {
+client.login(client.config.DISCORD_TOKEN)
+.then(() => {
   loadCommands(client)
   loadEvents(client)
 })
