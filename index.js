@@ -1,23 +1,24 @@
-require('dotenv').config()
+require('dotenv').config();
 const {
   Client,
   GatewayIntentBits,
   Partials,
   Collection
-} = require("discord.js")
+} = require('discord.js');
 
-const { loadCommands } = require("./bot/Handlers/commandHandler")
-const { loadEvents } = require('./bot/Handlers/eventHandler')
+const { loadCommands } = require('./bot/Handlers/commandHandler');
+const { loadEvents } = require('./bot/Handlers/eventHandler');
 
-// const express = require("express");
-// const http = require('http')
-// const {Server} = require('ws')
+const path = require('path');
+const express = require('express');
+const http = require('http');
+const { Server } = require('ws');
 
-// const port = 3000
+const port = 3000;
 
-// const app = express()
-// const server = http.createServer(app)
-// const wss = new Server({server})
+const app = express();
+const server = http.createServer(app);
+const wss = new Server({ server });
 
 const client = new Client({
   intents: [Object.keys(GatewayIntentBits)],
@@ -27,25 +28,23 @@ const client = new Client({
 client.commands = new Collection();
 client.config = process.env.DISCORD_TOKEN;
 
-client.login(client.config.DISCORD_TOKEN)
-.then(() => {
-  loadCommands(client)
-  loadEvents(client)
-})
+client.login(client.config.DISCORD_TOKEN).then(() => {
+  loadCommands(client);
+  loadEvents(client);
+});
 
-// app.use(express.static(path.join(__dirname, "/website/build")))
+app.use(express.static(path.join(__dirname, '/website/build')));
 
-// app.get("/", (req, res) => {
-//   res.sendFile(path.join(__dirname, "/website/build", "index.html"))
-// })
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '/website/build', 'index.html'));
+});
 
-// wss.on("connection", (ws) => {
-//   ws.on("message", (message) =>{
-//     console.log("mensagem recebida ", message)
-//   })
-// })
+wss.on('connection', (ws) => {
+  ws.on('message', (message) => {
+    console.log(`mensagem recebida ${message}`);
+  });
+});
 
-// server.listen(port, ()=> 
-//   console.log(`server listening on port: http://localhost:${port}`)
-// )
-
+server.listen(port, () =>
+  console.log(`server listening on port: http://localhost:${port}`)
+);
