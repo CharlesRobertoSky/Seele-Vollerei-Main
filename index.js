@@ -41,7 +41,7 @@ app.get('/', (req, res) => {
 
 wss.on('connection', (ws) => {
   ws.on('message', (message) => {
-    console.log(`mensagem recebida ${message}`);
+    console.log(`mensagem recebida do local host:${port} ${message}`);
   });
 });
 
