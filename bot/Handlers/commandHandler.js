@@ -1,9 +1,15 @@
+const { Logger } = require('../../utils/Logger');
+
+
 function loadCommands(client) {
   const ascii = require('ascii-table');
   const fs = require('fs');
   const table = new ascii().setHeading('commands', 'Status');
 
   let commandsArray = [];
+
+  if (!fs.existsSync('./bot/Commands'))
+    return Logger.warn('Commands folder not found');
 
   const commandsFolder = fs.readdirSync('./bot/Commands');
 
