@@ -24,7 +24,7 @@ function loadCommands(client) {
 
       client.commands.set(commandFile.data.name, properties);
 
-      commandsArray.push(commandsFile.data.toJSON());
+      commandsArray.push(commandFile.data.toJSON());
 
       table.addRow(file, 'loaded');
       continue;
