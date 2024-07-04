@@ -1,5 +1,5 @@
 require('dotenv').config();
-require('colors')
+require('colors');
 const {
   Client,
   GatewayIntentBits,
@@ -13,14 +13,14 @@ const { loadEvents } = require('./bot/Handlers/eventHandler');
 const path = require('path');
 const express = require('express');
 const http = require('http');
-const { Server } = require('socket.io');
+const { Server } = require('ws');
 const { Logger } = require('./utils/Logger');
 
 const port = 3000;
 
 const app = express();
 const server = http.createServer(app);
-const io = new Server(server);
+const io = new Server({ server });
 
 const client = new Client({
   intents: [Object.keys(GatewayIntentBits)],
@@ -29,8 +29,7 @@ const client = new Client({
 
 client.commands = new Collection();
 
-if(!!!process.env.DISCORD_TOKEN)
-  throw new Error('DISCORD_TOKEN is required!');
+if (!!!process.env.DISCORD_TOKEN) throw new Error('DISCORD_TOKEN is required!');
 
 client.config = process.env.DISCORD_TOKEN;
 
@@ -45,8 +44,8 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '/website/build', 'index.html'));
 });
 
-io.on('connection', (socket) => {
-  socket.on('message', (message) => {
+io.on('connection', socket => {
+  socket.on('message', message => {
     console.log(`mensagem recebida ${message}`);
   });
 });
