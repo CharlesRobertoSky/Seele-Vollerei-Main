@@ -13,7 +13,7 @@ const { loadEvents } = require('./bot/Handlers/eventHandler');
 const path = require('path');
 const express = require('express');
 const http = require('http');
-const { Server } = require('ws');
+const { Server } = require('socket.io');
 const { Logger } = require('./utils/Logger');
 
 const port = 3000;
