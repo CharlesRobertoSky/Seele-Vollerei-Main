@@ -18,5 +18,13 @@ module.exports = {
       information: '📓',
       gereral: '🌎'
     };
+
+    function getCommand(name) {
+      const getCommandID = client.application.commands.cache
+        .filter(cmd => cmd.name === name)
+        .map(cmd => cmd.id);
+
+      return getCommandID;
+    }
   }
 };
